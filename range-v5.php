@@ -74,7 +74,7 @@ class acf_field_range extends acf_field {
     	$this->settings = array(
 			'path' => apply_filters('acf/helpers/get_path', __FILE__),
 			'dir' => apply_filters('acf/helpers/get_dir', __FILE__),
-			'version' => '1.1.4'
+			'version' => '1.1.2'
 		);
 
     	
@@ -243,7 +243,7 @@ class acf_field_range extends acf_field {
 					$max_cur = $value_ar[1];
 				}
 			}
-			if($value===false || empty($value)){
+			if($value===false){
 				$value = $min_cur.';'.$max_cur;
 			}
 		}else{

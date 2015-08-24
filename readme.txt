@@ -4,7 +4,7 @@ Donate link: http://www.crazyxhtml.com
 Tags: acf, field, range, jquery
 Requires at least: 3.0.1
 Tested up to: 3.9.2
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ If the type is Range, it returns an array of minimum and maximum numbers.
 1. Default look
 
 == Changelog ==
+
+= 1.1.4 =
+* If a new post/page is created with a range field the default value is not returned since the user change the slider. I have changed the code so that the default value is returned if the user doesn't change the slider.
 
 = 1.1.3 =
 * ACF5 compatible

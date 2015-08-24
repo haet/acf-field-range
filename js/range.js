@@ -7,12 +7,13 @@
 		$(postbox).find('div.am_range_amount').each(function(){
 			var box = $(this);
 			var slider = box.find('div.am_range')
-				, min_val = parseFloat(slider.attr('data-min'))
-				, max_val = parseFloat(slider.attr('data-max'))
-				, min_cur_val = parseFloat(slider.attr('data-min-cur'))
-				, max_cur_val = parseFloat(slider.attr('data-max-cur'))
-				, step_val = parseFloat(slider.attr('data-step'))
-				, step_type = slider.attr('data-type');
+				, min_val = parseFloat(slider.data('min'))
+				, max_val = parseFloat(slider.data('max'))
+				, min_cur_val = parseFloat(slider.data('min-cur'))
+				, max_cur_val = parseFloat(slider.data('max-cur'))
+				, step_val = parseFloat(slider.data('step'))
+				, step_type = slider.data('type')
+				, orientation = slider.data('orientation');
 
 			if( acf.helpers.is_clone_field(slider) )
 			{
@@ -26,6 +27,7 @@
 					min: min_val,
 					max: max_val,
 					values: [ min_cur_val, max_cur_val ],
+					orientation: orientation,
 					slide: function( event, ui ) {
 						box.find('span.am_range_amount_min').html(ui.values[ 0 ]);
 						box.find('span.am_range_amount_max').html(ui.values[ 1 ]);
@@ -41,6 +43,7 @@
 					min: min_val,
 					max: max_val,
 					value: min_cur_val,
+					orientation: orientation,
 					slide: function( event, ui ) {
 						box.find('span.am_range_amount_min').html(ui.value);
 						box.find('input.am_range_input').val(ui.value);

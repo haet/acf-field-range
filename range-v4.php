@@ -32,7 +32,8 @@ class acf_field_range extends acf_field
 			'title' => __('Range','acf'),
 			'separate' => '-',
 			'prepend' => '',
-			'append'  => ''
+			'append'  => '',
+			'orientation' => 'horizontal'
 		);
 
 
@@ -44,7 +45,7 @@ class acf_field_range extends acf_field
 		$this->settings = array(
 			'path' => apply_filters('acf/helpers/get_path', __FILE__),
 			'dir' => apply_filters('acf/helpers/get_dir', __FILE__),
-			'version' => '1.1.4'
+			'version' => '1.1.2'
 		);
 
 	}
@@ -87,6 +88,23 @@ class acf_field_range extends acf_field
 				'name'  => 'fields[' . $key . '][slider_type]',
 				'choices'  => array('default'=>__('Number','acf'), 'range'=>__('Range','acf')),
 				'value' => $field['slider_type'],
+				'layout'  => 'horizontal'
+			) );
+		?>
+	</td>
+</tr>
+<tr class="field_option field_option_range_type field_option_<?php echo $this->name; ?>">
+	<td class="label">
+		<label><?php _e("Orientation",'acf'); ?></label>
+		<p class="description"><?php _e('Display either horizontal of vertical slider','acf'); ?></p>
+	</td>
+	<td>
+		<?php
+		do_action('acf/create_field', array(
+				'type'    => 'radio',
+				'name'  => 'fields[' . $key . '][orientation]',
+				'choices'  => array('horizontal'=>__('horizontal','acf'), 'vertical'=>__('vertical','acf')),
+				'value' => $field['orientation'],
 				'layout'  => 'horizontal'
 			) );
 		?>
@@ -252,6 +270,10 @@ class acf_field_range extends acf_field
 		$slider_type = $field['slider_type'];
 		if(empty($slider_type))
 			$slider_type = 'default';
+		$orientation = $field['orientation'];
+		if(empty($orientation))
+			$orientation = 'horizontal';
+
 		$min = $field['min'];
 		$max = $field['max'];
 		$prepend = $field['prepend'];
@@ -281,14 +303,14 @@ class acf_field_range extends acf_field
 					$max_cur = $value_ar[1];
 				}
 			}
-			if($value===false || empty($value)){
+			if($value===false){
 				$value = $min_cur.';'.$max_cur;
 			}
 		}else{
-			if( isset( $value ) && $value!=''){
+			if($value!=''){
 				$min_cur = $max_cur = $value;
 			}
-			if( isset( $value ) && $value===false){
+			if($value===false){
 				$value = $min_cur;
 			}
 		}
@@ -301,7 +323,7 @@ class acf_field_range extends acf_field
 			echo '<p>'.$title.$prepend.'<span class="am_range_amount_min"></span>'.$append.'</p>';
 		}
 		
-		echo '<div class="am_range" data-min="' . $min . '" data-max="' . $max . '" data-min-cur="' . $min_cur . '" data-max-cur="' . $max_cur . '" data-step="' . $step . '" data-type="' . $slider_type . '"></div>';
+		echo '<div class="am_range" data-min="' . $min . '" data-max="' . $max . '" data-min-cur="' . $min_cur . '" data-max-cur="' . $max_cur . '" data-step="' . $step . '" data-type="' . $slider_type . '" data-orientation="'.$orientation.'"></div>';
 		
 		echo '<input type="hidden" value="' . $value . '" name="' . $field['name'] . '" class="am_range_input" />';
 		
